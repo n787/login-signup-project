@@ -128,7 +128,7 @@ const LoginSignup = () => {
         >
           <Content
             className={
-              signupClicked ? "right-panel sign-up-mode" : "right-panel"
+              signupClicked ? "right-panel sign-up-mode-right" : "right-panel"
             }
           >
             <Text>One of us ?</Text>
@@ -148,7 +148,7 @@ const LoginSignup = () => {
           <Image
             as={RegisterImage}
             className={
-              signupClicked ? "right-panel sign-up-mode" : "right-panel"
+              signupClicked ? "right-panel sign-up-mode-right" : "right-panel"
             }
           />
         </Panel>

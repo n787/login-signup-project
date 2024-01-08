@@ -19,14 +19,47 @@ export const Container = styled.div`
     transform: translateY(-50%);
     z-index: 6;
     transition: 1.8s ease-in-out;
+
+    @media (max-width: 870px) {
+      width: 1500px;
+      height: 1500px;
+      transform: translateX(-50%);
+      left: 30%;
+      bottom: 68%;
+      right: initial;
+      top: initial;
+      transition: 2s ease-in-out;
+    }
+
+    @media (max-width: 570px) {
+      bottom: 72%;
+      left: 50%;
+    }
   }
 
   &.sign-up-mode::before {
     transform: translate(100%, -50%);
     right: 52%;
+
+    @media (max-width: 870px) {
+      transform: translate(-50%, 100%);
+      bottom: 32%;
+      right: initial;
+    }
+
+    @media (max-width: 570px) {
+      bottom: 28%;
+      left: 50%;
+    }
   }
 
   @media (max-width: 870px) {
+    min-height: 800px;
+    height: 100vh;
+  }
+
+  @media (max-width: 570px) {
+    padding: 1.5rem;
   }
 `;
 
@@ -51,6 +84,19 @@ export const LoginSignupForms = styled.div`
 
   &.sign-up-mode {
     left: 25%;
+    @media (max-width: 870px) {
+      left: 50%;
+      top: 5%;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @media (max-width: 870px) {
+    width: 100%;
+    left: 50%;
+    top: 95%;
+    transform: translate(-50%, -100%);
+    transition: 1s 0.8s ease-in-out;
   }
 `;
 
@@ -81,6 +127,9 @@ export const Form = styled.form`
   &.sign-in-mode {
     z-index: 2;
     opacity: 1;
+  }
+  @media (max-width: 570px) {
+    padding: 0 1.5rem;
   }
 `;
 
@@ -147,6 +196,12 @@ export const Button = styled.button`
     height: 41px;
     font-weight: 600;
     font-size: 0.8rem;
+
+    @media (max-width: 870px) {
+      width: 110px;
+      height: 35px;
+      font-size: 0.7rem;
+    }
   }
 `;
 
@@ -188,6 +243,11 @@ export const PanelContainer = styled.div`
   left: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 870px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+  }
 `;
 
 export const Panel = styled.div`
@@ -202,18 +262,38 @@ export const Panel = styled.div`
   &.left-panel {
     pointer-events: all;
     padding: 3rem 17% 2rem 12%;
+
+    @media (max-width: 870px) {
+      grid-row: 1 / 2;
+    }
+
+    @media (max-width: 570px) {
+      padding-top: 1rem;
+    }
   }
 
   &.sign-up-mode-left {
     pointer-events: none;
   }
+
   &.right-panel {
     pointer-events: none;
     padding: 3rem 12% 2rem 17%;
+    @media (max-width: 870px) {
+      grid-row: 3 / 4;
+    }
   }
 
   &.sign-up-mode-right {
     pointer-events: all;
+  }
+
+  @media (max-width: 870px) {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2.5rem 8%;
+    grid-column: 1 / 2;
   }
 `;
 
@@ -223,14 +303,36 @@ export const Content = styled.div`
 
   &.right-panel {
     transform: translateX(800px);
+
+    @media (max-width: 870px) {
+      transform: translateY(300px);
+    }
   }
 
-  &.sign-up-mode {
+  &.sign-up-mode-right {
     transform: translateX(0px);
+
+    @media (max-width: 870px) {
+      transform: translateY(0px);
+    }
   }
 
   &.left-panel {
     transform: translateX(-800px);
+
+    @media (max-width: 870px) {
+      transform: translateY(-300px);
+    }
+  }
+
+  @media (max-width: 870px) {
+    padding-right: 15%;
+    transition: transform 0.9s ease-in-out;
+    transition-delay: 0.8s;
+  }
+
+  @media (max-width: 570px) {
+    //padding: 0.5rem 1rem;
   }
 `;
 
@@ -238,11 +340,20 @@ export const Text = styled.h3`
   font-weight: 600;
   line-height: 1;
   font-size: 1.5rem;
+
+  @media (max-width: 870px) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const SubText = styled.p`
   font-size: 0.95rem;
   padding: 0.7rem 0;
+
+  @media (max-width: 870px) {
+    font-size: 0.7rem;
+    padding: 0.5rem 0;
+  }
 `;
 
 export const Image = styled.svg`
@@ -252,13 +363,35 @@ export const Image = styled.svg`
 
   &.right-panel {
     transform: translateX(800px);
+
+    @media (max-width: 870px) {
+      transform: translateY(300px);
+    }
   }
 
-  &.sign-up-mode {
+  &.sign-up-mode-right {
     transform: translateX(0px);
+
+    @media (max-width: 870px) {
+      transform: translateY(0px);
+    }
   }
 
   &.left-panel {
     transform: translateX(-800px);
+
+    @media (max-width: 870px) {
+      transform: translateY(-300px);
+    }
+  }
+
+  @media (max-width: 870px) {
+    //width: 200px;
+    transition: transform 0.9s ease-in-out;
+    transition-delay: 0.6s;
+  }
+
+  @media (max-width: 570px) {
+    display: none;
   }
 `;
