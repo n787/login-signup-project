@@ -144,13 +144,24 @@ export const InputField = styled.div`
   width: 100%;
   height: 55px;
   background-color: #f0f0f0;
-  margin: 10px 0;
   border-radius: 55px;
   display: flex;
   //grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   align-items: center;
   justify-content: center;
+`;
+
+export const ErrorMessage = styled.p`
+  padding: 0;
+  margin: 0 0 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #f04438;
+  max-width: 340px;
+  width: 100%;
 `;
 
 export const Input = styled.input`
