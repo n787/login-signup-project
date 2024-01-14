@@ -10,7 +10,7 @@ import {
   SocialText,
   Title,
 } from "./LoginSignupStyles";
-import { FaFacebook, FaGoogle, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 const Login = ({ signupClicked }) => {
   const username = useRef();
@@ -76,16 +76,16 @@ const Login = ({ signupClicked }) => {
       <SocialText>Or Sign in with social platforms</SocialText>
       <SocialMedia>
         <SocialIcon>
-          <FaFacebook />
-        </SocialIcon>
-        <SocialIcon>
-          <FaTwitter />
-        </SocialIcon>
-        <SocialIcon>
           <FaGoogle />
         </SocialIcon>
         <SocialIcon>
+          <FaFacebook />
+        </SocialIcon>
+        <SocialIcon>
           <FaLinkedin />
+        </SocialIcon>
+        <SocialIcon>
+          <FaGithub />
         </SocialIcon>
       </SocialMedia>
     </Form>
