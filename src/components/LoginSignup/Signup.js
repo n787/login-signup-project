@@ -18,12 +18,13 @@ const Signup = ({ signupClicked }) => {
   const password = useRef();
   const [errors, setErrors] = useState({});
 
-  const handleSignupSubmit = (event) => {
+  const handleSignupSubmit = async (event) => {
     event.preventDefault();
     const usernameElement = username.current.value;
     const emailElement = email.current.value;
     const passwordElement = password.current.value;
     console.log(usernameElement, emailElement, passwordElement);
+
     // Basic validation
     const usernameValue = username.current.value.trim();
     const emailValue = email.current.value.trim();
@@ -53,6 +54,33 @@ const Signup = ({ signupClicked }) => {
 
     // If no errors, proceed with form submission
     console.log(usernameValue, emailValue, passwordValue);
+
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: usernameValue,
+          email: emailValue,
+          password: passwordValue,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.message); // User registered successfully
+        // Optionally, you can redirect the user to the login page or handle it as needed.
+      } else {
+        console.log("data from res: ", data);
+        setErrors({ ...errors, username: data.message });
+        return;
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
 
     // Clear form fields and errors
     username.current.value = "";
