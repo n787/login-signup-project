@@ -11,6 +11,7 @@ import {
   Title,
 } from "./LoginSignupStyles";
 import { FaFacebook, FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({ signupClicked }) => {
   const username = useRef();
@@ -18,12 +19,10 @@ const Signup = ({ signupClicked }) => {
   const password = useRef();
   const [errors, setErrors] = useState({});
 
+  const navigate = useNavigate();
+
   const handleSignupSubmit = async (event) => {
     event.preventDefault();
-    const usernameElement = username.current.value;
-    const emailElement = email.current.value;
-    const passwordElement = password.current.value;
-    console.log(usernameElement, emailElement, passwordElement);
 
     // Basic validation
     const usernameValue = username.current.value.trim();
@@ -53,7 +52,12 @@ const Signup = ({ signupClicked }) => {
     }
 
     // If no errors, proceed with form submission
-    console.log(usernameValue, emailValue, passwordValue);
+    console.log(
+      "submission values: ",
+      usernameValue,
+      emailValue,
+      passwordValue
+    );
 
     try {
       const response = await fetch("http://localhost:3001/api/auth/signup", {
@@ -71,11 +75,34 @@ const Signup = ({ signupClicked }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data.message); // User registered successfully
+        console.log("sign up success: ", data.message); // User registered successfully
         // Optionally, you can redirect the user to the login page or handle it as needed.
+        navigate("/home");
       } else {
         console.log("data from res: ", data);
-        setErrors({ ...errors, username: data.message });
+        const newErrors = {};
+
+        if (data.message.includes("Username is already taken")) {
+          newErrors.username = data.message;
+        }
+
+        if (data.message.includes("Email is already in use")) {
+          newErrors.email = data.message;
+        }
+
+        if (
+          data.message.includes(
+            "Password should be: \n1. minimum 8 character \n2. combination of letters, numbers and symbols"
+          )
+        ) {
+          newErrors.password = data.message;
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+          // If there are errors, set the state and do not proceed with form submission
+          setErrors(newErrors);
+          return;
+        }
       }
     } catch (error) {
       console.error("Error during signup:", error);

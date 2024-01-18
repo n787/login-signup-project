@@ -11,7 +11,10 @@ function App() {
         <Route path="/" element={<LoginSignup />} />
 
         {/* Route for the Signup component */}
-        <Route path="/signup" element={<LoginSignup signupClicked={true} />} />
+        <Route
+          path="/signup"
+          element={<LoginSignup signupClickedInit={true} />}
+        />
 
         {/* Route for the Home component */}
         <Route path="/home" element={<Home />} />

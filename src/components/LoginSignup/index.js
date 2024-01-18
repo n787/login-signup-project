@@ -8,8 +8,10 @@ import Login from "./Login";
 import Signup from "./Signup";
 import PanelModal from "./Panel";
 
-const LoginSignup = () => {
-  const [signupClicked, setSignupClicked] = useState(false);
+const LoginSignup = ({ signupClickedInit }) => {
+  const [signupClicked, setSignupClicked] = useState(
+    signupClickedInit || false
+  );
 
   const handleSignupClicked = () => {
     setSignupClicked(!signupClicked);
