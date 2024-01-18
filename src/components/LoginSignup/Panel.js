@@ -10,10 +10,12 @@ import {
 } from "./LoginSignupStyles";
 import { ReactComponent as LoginImage } from "../../assets/login_img.svg";
 import { ReactComponent as RegisterImage } from "../../assets/register_img.svg";
+import { Link } from "react-router-dom";
 
 const PanelModal = ({ signupClicked, handleSignupClicked }) => {
   return (
     <PanelContainer>
+      {/** Sign up Panel - left side panel */}
       <Panel
         className={
           signupClicked ? "left-panel sign-up-mode-left" : "left-panel"
@@ -27,9 +29,12 @@ const PanelModal = ({ signupClicked, handleSignupClicked }) => {
             ad quos neque cum excepturi rem debitis atque suscipit adipisci
             perferendis alias voluptates.
           </SubText>
-          <Button className="btn-transparent" onClick={handleSignupClicked}>
-            Sign up
-          </Button>
+          {/** redirect to sign up page */}
+          <Link to="/signup">
+            <Button className="btn-transparent" onClick={handleSignupClicked}>
+              Sign up
+            </Button>
+          </Link>
         </Content>
         <Image
           as={LoginImage}
@@ -37,6 +42,7 @@ const PanelModal = ({ signupClicked, handleSignupClicked }) => {
         />
       </Panel>
 
+      {/** Sign in Panel - right side panel*/}
       <Panel
         className={
           signupClicked ? "right-panel sign-up-mode-right" : "right-panel"
@@ -54,9 +60,12 @@ const PanelModal = ({ signupClicked, handleSignupClicked }) => {
             ad quos neque cum excepturi rem debitis atque suscipit adipisci
             perferendis alias voluptates.
           </SubText>
-          <Button className="btn-transparent" onClick={handleSignupClicked}>
-            Sign in
-          </Button>
+          {/** redirect to sign in page */}
+          <Link to="/">
+            <Button className="btn-transparent" onClick={handleSignupClicked}>
+              Sign in
+            </Button>
+          </Link>
         </Content>
         <Image
           as={RegisterImage}

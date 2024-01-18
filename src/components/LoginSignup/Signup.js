@@ -76,7 +76,6 @@ const Signup = ({ signupClicked }) => {
       } else {
         console.log("data from res: ", data);
         setErrors({ ...errors, username: data.message });
-        return;
       }
     } catch (error) {
       console.error("Error during signup:", error);
