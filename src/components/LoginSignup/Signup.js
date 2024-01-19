@@ -75,7 +75,24 @@ const Signup = ({ signupClicked }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("sign up success: ", data.message); // User registered successfully
+        console.log("sign up success: ", data.message, data.saved_user); // User registered successfully
+        // const receivedAccessToken = data.accessToken;
+
+        // // Fetch user data after signup using the access token
+        // const userDataResponse = await fetch(
+        //   "http://localhost:3001/api/auth/user-data",
+        //   {
+        //     method: "GET",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //       Authorization: `Bearer ${receivedAccessToken}`,
+        //     },
+        //   }
+        // );
+
+        // const userData = await userDataResponse.json();
+        // console.log("signed up user: ", userData);
+
         // Optionally, you can redirect the user to the login page or handle it as needed.
         navigate("/home");
       } else {
