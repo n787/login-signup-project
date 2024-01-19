@@ -1,3 +1,4 @@
+//Login.js
 import React, { useRef, useState } from "react";
 import {
   Button,
@@ -11,13 +12,16 @@ import {
   Title,
 } from "./LoginSignupStyles";
 import { FaFacebook, FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ signupClicked }) => {
   const username = useRef();
   const password = useRef();
   const [errors, setErrors] = useState({});
 
-  const handleLoginSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
     const usernameElement = username.current.value;
     const passwordElement = password.current.value;
@@ -45,6 +49,49 @@ const Login = ({ signupClicked }) => {
 
     // If no errors, proceed with form submission
     console.log(usernameValue, passwordValue);
+
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: usernameValue,
+          password: passwordValue,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Login success:", data.message, data.user);
+        // Handle success, e.g., redirect or update state
+
+        navigate("/home");
+      } else {
+        console.error("Login failed:", data.message);
+        // Handle failure, e.g., display error message
+
+        const newErrors = {};
+
+        if (data.message.includes("Invalid username")) {
+          newErrors.username = data.message;
+        }
+
+        if (data.message.includes("Invalid password")) {
+          newErrors.password = data.message;
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+          // If there are errors, set the state and do not proceed with form submission
+          setErrors(newErrors);
+          return;
+        }
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
 
     // Clear form fields and errors
     username.current.value = "";
